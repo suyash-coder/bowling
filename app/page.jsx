@@ -25,10 +25,13 @@ export default function Home() {
   
       </div>
       <div className="bg-orange-900 p-3 rounded-xl mt-36 gap-10 flex justify-center">
-        <Button asChild className="px-16 bg-orange-300 text-black hover:text-white">
-          <Link href="/login"> Login </Link>
+        <Button asChild className="px-6 bg-orange-300 text-black hover:text-white">
+          <Link href="/customer-login">Login</Link>
         </Button>
-        <Button asChild className="px-16 bg-orange-300 text-black hover:text-white">
+        <Button asChild className="px-2 bg-orange-300 text-black hover:text-white">
+          <Link href="/owner-login">Login as owner</Link>
+        </Button>
+        <Button asChild className="px-6 bg-orange-300 text-black hover:text-white">
           <Link href="/register">Sign Up</Link>
         </Button>
       </div>

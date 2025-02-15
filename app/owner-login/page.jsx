@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Alert } from "reactstrap";
+
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -19,21 +21,24 @@ export default function Login() {
     if (email === ownerEmail) {
       router.push("/owner-dashboard")
     } else {
-      router.push("/customer-dashboard")
+        <Alert color="warning">
+        <strong>Email not registered as owner</strong> 
+      </Alert>
     }
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center">Login</h1>
-        <div className="space-y-2">
+    <div className="flex min-h-screen items-center justify-center bg-[url('/bg.png')] bg-cover">
+      <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm p-10 bg-orange-400 flex flex-col rounded-3xl bg-opacity-90">
+        <h1 className="text-4xl text-orange-950 font-bold text-center">Login</h1>
+        <div className="space-y-2 " >
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <Input className=" bg-orange-200" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
           <Input
+            className=" bg-orange-200"
             id="password"
             type="password"
             value={password}
@@ -41,7 +46,7 @@ export default function Login() {
             required
           />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full bg-orange-950 text-white hover:text-black hover:bg-orange-700">
           Login
         </Button>
       </form>
