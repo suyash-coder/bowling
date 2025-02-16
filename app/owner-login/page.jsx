@@ -1,30 +1,55 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
-
-
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const router = useRouter()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    // Here you would typically handle the login logic
-    // For this example, we'll use a hardcoded owner email
-    const ownerEmail = "vbsuyash10@gmail.com"
-    if (email === ownerEmail) {
-      router.push("/owner-dashboard")
-    } else {
-        alert("Email not registered as owner")
-    }
-  }
+    e.preventDefault();
+    setLoading(true);
 
+    try {
+      const response = await fetch("https://bowling-alley.onrender.com/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // Store user data in localStorage
+      localStorage.setItem("userId", data.userId);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+
+      alert("Login successful!");
+
+      // Redirect based on user role
+      if (data.role === "owner") {
+        router.push("/owner-dashboard");
+      } else {
+        router.push("/customer-dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex min-h-screen items-center justify-center bg-[url('/bg.png')] bg-cover">
       <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm p-10 bg-orange-400 flex flex-col rounded-3xl bg-opacity-90">

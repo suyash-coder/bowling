@@ -5,28 +5,96 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Image from "next/image"
+import Image from "next/image";
 
 export default function OwnerDashboard() {
   const [pendingRequests, setPendingRequests] = useState([])
   const [confirmedBookings, setConfirmedBookings] = useState([])
-
+  const [users, setUsers] = useState([])
   useEffect(() => {
     // Fetch pending requests and confirmed bookings from an API
     // This is a mock implementation
-    const mockPendingRequests = [
-      { id: 1, customerName: "John Doe", date: "2023-06-01", time: "14:00", laneNumber: 2, playerCount: 3 },
-      { id: 2, customerName: "Jane Smith", date: "2023-06-01", time: "16:00", laneNumber: 1, playerCount: 4 },
-      { id: 3, customerName: "Bob Johnson", date: "2023-06-02", time: "15:00", laneNumber: 3, playerCount: 2 },
-    ]
-    setPendingRequests(mockPendingRequests)
+   const fetchPendingRequests =async()=>{
+    try{
+      const response = await
+      fetch("https://bowling-alley.onrender.com/api/bookings/requests");
 
-    const mockConfirmedBookings = [
-      { id: 4, customerName: "Alice Brown", date: "2023-06-03", time: "18:00", laneNumber: 4, playerCount: 2 },
-      { id: 5, customerName: "Charlie Davis", date: "2023-06-04", time: "19:00", laneNumber: 1, playerCount: 3 },
-    ]
-    setConfirmedBookings(mockConfirmedBookings)
-  }, [])
+      if (response.ok)
+      {
+        const data =await response.json();
+        setPendingRequests(data);
+      }else{
+        alert("Failed to fetch pending bookings requests.");
+      }
+    }catch(error){
+      console.error("Error fetching pending booking requests",error);
+    }
+   };
+   fetchPendingRequests();},[]);
+    
+   useEffect(() => {
+    const fetchConfirmedBookings = async()=>{
+      try{
+        const response = await 
+        fetch("https://bowling-alley.onrender.com/api/bookings/confirmed");
+
+        if(response.ok){
+          const data= await response.json();
+          setConfirmedBookings(data);
+        }else{
+          alert("Failed to fetch confirmed bookings.");
+        }
+      }catch(error){
+        console.error("Error fetching confirmed bookings:",error);
+      }
+    }
+    fetchConfirmedBookings();},[]);
+    useEffect(() => {
+      const fetchUsers = async () => {
+          const response = await fetch("https://bowling-alley.onrender.com/api/users");
+          const users = await response.json();
+          setUsers(users);
+      };
+      fetchUsers();
+  }, []);
+
+  const deleteUser = async (userId) => {
+    await fetch(`https://bowling-alley.onrender.com/api/users/${userId}`, { method: "DELETE" });
+    alert("User deleted");
+};
+
+const approveBooking = async (bookingId) => {
+  try {
+      const response = await fetch(`https://bowling-alley.onrender.com/api/bookings/${bookingId}/approve`, {
+          method: "PUT",
+      });
+
+      if (response.ok) {
+          alert("Booking approved!");
+          setRequests(requests.filter((req) => req.id !== bookingId)); // Remove from UI
+      } else {
+          alert("Failed to approve booking.");
+      }
+  } catch (error) {
+      console.error("Error approving booking:", error);
+  }
+};
+const rejectBooking = async (bookingId) => {
+  try {
+      const response = await fetch(`https://bowling-alley.onrender.com/api/bookings/${bookingId}/reject`, {
+          method: "PUT",
+      });
+
+      if (response.ok) {
+          alert("Booking rejected!");
+          setRequests(requests.filter((req) => req.id !== bookingId)); // Remove from UI
+      } else {
+          alert("Failed to reject booking.");
+      }
+  } catch (error) {
+      console.error("Error rejecting booking:", error);
+  }
+};
 
   const handleRequestAction = (id, action) => {
     // In a real application, this would be an API call
@@ -39,7 +107,14 @@ export default function OwnerDashboard() {
       setPendingRequests(pendingRequests.filter((req) => req.id !== id))
     }
   }
-
+  useEffect(() => {
+    const fetchRequests = async () => {
+        const response = await fetch("https://bowling-alley.onrender.com/api/bookings/requests");
+        const requests = await response.json();
+        setRequests(requests);
+    };
+    fetchRequests();
+}, []);
   return (
     <div className="p-8 bg-[url('/bg.png')] bg-cover bg-fixed">
       <div className="flex justify-between">
