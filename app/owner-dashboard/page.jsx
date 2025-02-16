@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image"
 
 export default function OwnerDashboard() {
   const [pendingRequests, setPendingRequests] = useState([])
@@ -40,22 +41,32 @@ export default function OwnerDashboard() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Owner Dashboard</h1>
-      <Tabs defaultValue="pending">
-        <TabsList>
-          <TabsTrigger value="pending">Pending Requests</TabsTrigger>
-          <TabsTrigger value="confirmed">Confirmed Bookings</TabsTrigger>
+    <div className="p-8 bg-[url('/bg.png')] bg-cover bg-fixed">
+      <div className="flex justify-between">
+         <h1 className="text-6xl font-extrabold bg-orange-950 bg-opacity-85 text-orange-400 p-6 rounded-3xl  mb-4">Owner Dashboard</h1>
+        <Image  
+              src='ball.png'
+              alt="Ball"
+              height={100}
+              width={100}
+              className="ml-96 bg-orange-200 bg-opacity-75 rounded-3xl mb-4"
+            />
+      </div>
+     
+      <Tabs defaultValue="pending" >
+        <TabsList className="bg-orange-200 ">
+          <TabsTrigger value="pending" className="hover:bg-orange-950 hover:text-orange-400 active:bg-orange-600 active:text-black" >Pending Requests</TabsTrigger>
+          <TabsTrigger value="confirmed" className="hover:bg-orange-950 hover:text-orange-400 active:bg-orange-600 active:text-black ">Confirmed Bookings</TabsTrigger>
         </TabsList>
         <TabsContent value="pending">
-          <Card>
+          <Card className="bg-orange-700">
             <CardHeader>
-              <CardTitle>Pending Booking Requests</CardTitle>
+              <CardTitle className="text-orange-950 font-extrabold text-3xl">Pending Booking Requests</CardTitle>
             </CardHeader>
             <CardContent>
               <ScrollArea className="h-[500px]">
                 {pendingRequests.map((request) => (
-                  <div key={request.id} className="mb-4 p-4 border rounded">
+                  <div key={request.id} className="mb-4 p-4 border rounded text-orange-300 bg-orange-950">
                     <p>
                       <strong>{request.customerName}</strong>
                     </p>
@@ -64,10 +75,10 @@ export default function OwnerDashboard() {
                     <p>Lane: {request.laneNumber}</p>
                     <p>Players: {request.playerCount}</p>
                     <div className="mt-2 space-x-2">
-                      <Button onClick={() => handleRequestAction(request.id, "accept")} variant="default">
+                      <Button onClick={() => handleRequestAction(request.id, "accept")} variant="default"  className="bg-orange-300 text-black hover:text-orange-200">
                         Accept
                       </Button>
-                      <Button onClick={() => handleRequestAction(request.id, "decline")} variant="destructive">
+                      <Button onClick={() => handleRequestAction(request.id, "decline")} variant="destructive" className="hover:bg-black hover:text-orange-200">
                         Decline
                       </Button>
                     </div>
@@ -77,15 +88,15 @@ export default function OwnerDashboard() {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="confirmed">
-          <Card>
+        <TabsContent value="confirmed" >
+          <Card className="bg-orange-700">
             <CardHeader>
-              <CardTitle>Confirmed Bookings</CardTitle>
+              <CardTitle className="text-orange-950 font-extrabold text-3xl">Confirmed Bookings</CardTitle>
             </CardHeader>
             <CardContent>
               <ScrollArea className="h-[500px]">
                 {confirmedBookings.map((booking) => (
-                  <div key={booking.id} className="mb-4 p-4 border rounded">
+                  <div key={booking.id} className="mb-4 p-4 border rounded  text-orange-300 bg-orange-950">
                     <p>
                       <strong>{booking.customerName}</strong>
                     </p>
