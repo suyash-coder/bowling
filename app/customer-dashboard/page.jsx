@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Image from "next/image"
+
 
 export default function CustomerDashboard() {
   const [date, setDate] = useState("")
@@ -30,6 +32,9 @@ export default function CustomerDashboard() {
   const [selectedSlot, setSelectedSlot] = useState(null)
   const [customerName, setCustomerName] = useState("")
   const [playerCount, setPlayerCount] = useState(1)
+  const [phonenumber, setphonenumber] = useState()
+
+
 
   useEffect(() => {
     // Generate available dates (7 days from today)
@@ -67,17 +72,29 @@ export default function CustomerDashboard() {
       slot: selectedSlot,
       customerName,
       playerCount,
+      phonenumber,
     })
     alert("Booking request sent to owner!")
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Customer Dashboard</h1>
+    <main className="p-8 bg-[url('/bg.png')] bg-cover bg-fixed min-h-screen">
+       <div className="flex  justify-end">
+      <h1 className="text-5xl text-orange-400 mr-44 font-bold flex p-5 rounded-3xl bg-orange-950 bg-opacity-75 mb-4">
+        Customer Dashboard
+        </h1>
+        <Image  
+        src='ball.png'
+        alt="Ball"
+        height={100}
+        width={100}
+        className="ml-96 bg-orange-200 bg-opacity-75 rounded-3xl mb-4"
+      />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
+        <Card className="bg-orange-400">
           <CardHeader>
-            <CardTitle>Select Date and Time</CardTitle>
+            <CardTitle className="font-extrabold text-orange-800">Select Date and Time</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -110,20 +127,20 @@ export default function CustomerDashboard() {
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleSearch}>Search Available Slots</Button>
+            <Button onClick={handleSearch} className="w-full bg-orange-950 text-white hover:text-black hover:bg-orange-700">Search Available Slots</Button>
           </CardContent>
         </Card>
         {availableSlots.length > 0 && (
-          <Card>
+          <Card className="bg-orange-900">
             <CardHeader>
-              <CardTitle>Available Slots</CardTitle>
+              <CardTitle className="font-extrabold text-orange-400">Available Slots</CardTitle>
             </CardHeader>
             <CardContent>
               <ScrollArea className="h-[200px]">
                 {availableSlots.map((slot) => (
                   <div
                     key={slot.id}
-                    className={`p-4 mb-2 border rounded cursor-pointer ${selectedSlot?.id === slot.id ? "bg-primary text-primary-foreground" : ""}`}
+                    className={`p-4 mb-2 rounded cursor-pointer bg-orange-200 text-orange-950 ${selectedSlot?.id === slot.id ? "bg-primary text-primary-foreground" : ""}`}
                     onClick={() => handleSlotSelect(slot)}
                   >
                     <p>Lane {slot.laneNumber}</p>
@@ -136,9 +153,9 @@ export default function CustomerDashboard() {
         )}
       </div>
       {selectedSlot && (
-        <Card className="mt-8">
+        <Card className="mt-8 bg-orange-200">
           <CardHeader>
-            <CardTitle>Booking Details</CardTitle>
+            <CardTitle className="font-extrabold text-orange-950">Booking Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -162,11 +179,25 @@ export default function CustomerDashboard() {
                 required
               />
             </div>
-            <Button onClick={handleProceedToPayment}>Send Booking Request</Button>
+            <div className="space-y-2">
+              <Label htmlFor="phonenummber">Phone Number</Label>
+              <Input
+                id="phonenumber"
+                type="number"
+                min="1000000000"
+                max="9999999999"
+                value={phonenumber}
+                onChange={(e) => setphonenumber(Number.parseInt(e.target.value))}
+                required
+              />
+            </div>
+            <Button onClick={handleProceedToPayment} className=" bg-orange-950 text-white hover:text-black hover:bg-orange-700">Send Booking Request</Button>
           </CardContent>
         </Card>
       )}
-    </div>
+   
+    </main>
+    
   )
 }
 

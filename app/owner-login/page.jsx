@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[url('/bg.png')] bg-cover">
       <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm p-10 bg-orange-400 flex flex-col rounded-3xl bg-opacity-90">
-        <h1 className="text-4xl text-orange-950 font-bold text-center">Login</h1>
+        <h1 className="text-4xl text-orange-950 font-bold text-center">Owner Login</h1>
         <div className="space-y-2 " >
           <Label htmlFor="email">Email</Label>
           <Input className=" bg-orange-200" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
