@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Alert } from "reactstrap";
+
 
 
 export default function Login() {
@@ -21,9 +21,7 @@ export default function Login() {
     if (email === ownerEmail) {
       router.push("/owner-dashboard")
     } else {
-        <Alert color="warning">
-        <strong>Email not registered as owner</strong> 
-      </Alert>
+        alert("Email not registered as owner")
     }
   }
 

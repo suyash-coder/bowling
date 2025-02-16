@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault()
     // Here you would typically handle the login logic
     // For this example, we'll use a hardcoded owner email
-   
+    router.push("/customer-dashboard")
   }
 
   return (
