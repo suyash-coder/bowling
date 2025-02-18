@@ -11,12 +11,43 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    // Here you would typically handle the login logic
-    // For this example, we'll use a hardcoded owner email
-    router.push("/customer-dashboard")
+  
+  const handleLogin = async (email,password)=>{
+
+    try{
+      const response = await
+    fetch("https://bowling-alley.onrender.com/api/users/login",{ 
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({email,password}),
+    });
+
+    const data = await response.json();
+    if(response.ok){
+      localStorage.setItem("userId",data.userId);
+
+      alert("Login successful!");
+    }else{
+      alert(`Login Failed:${data.message}`);
+    }
+
+  } catch(error){
+    console.error("Error logging in :",error);
+    alert("Something went wrong. Please try again.");
   }
+}
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  await handleLogin(email,password);
+
+  // Here you would typically handle the login logic
+  // For this example, we'll use a hardcoded owner email
+  router.push("/customer-dashboard")
+};
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[url('/bg.png')] bg-cover">
