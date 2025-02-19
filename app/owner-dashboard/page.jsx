@@ -11,6 +11,7 @@ export default function OwnerDashboard() {
   const [pendingRequests, setPendingRequests] = useState([])
   const [confirmedBookings, setConfirmedBookings] = useState([])
   const [users, setUsers] = useState([])
+  const [requests, setRequests  ] = useState([])
   useEffect(() => {
     // Fetch pending requests and confirmed bookings from an API
     // This is a mock implementation
