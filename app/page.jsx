@@ -11,7 +11,7 @@ export default function Home() {
      
       <h1 className="text-6xl text- font-bold text-orange-900 mb-2">WELCOME</h1>
       <h1 className="text-orange-900">TO</h1>
-      <h1 className="text-7xl text-center text-orange-900 font-bold ">XYZ </h1>
+      <h1 className="text-9xl text-center text-orange-900 font-extrabold font-serif ">SS</h1>
       <h1 className="text-5xl text-center text-orange-900 font-bold  mb-8 ">BOWLING ALLEY </h1>
 
     </div> 
@@ -20,11 +20,11 @@ export default function Home() {
         alt="Ball"
         height={130}
         width={130}
-        className=" absolute ml-96 mb-72"
+        className=" absolute ml-96 mb-80"
       />
   
       </div>
-      <div className="bg-orange-900 p-3 rounded-xl mt-36 gap-10 flex justify-center">
+      <div className="bg-orange-900 p-3 rounded-xl mt-44 gap-10 flex justify-center">
         <Button asChild className="px-6 bg-orange-300 text-black hover:text-white">
           <Link href="/customer-login">Login</Link>
         </Button>

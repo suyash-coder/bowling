@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,7 +25,7 @@ export default function Login() {
         <h1 className="text-4xl text-orange-950 font-bold text-center">Login</h1>
         <div className="space-y-2 " >
           <Label htmlFor="email">Email</Label>
-          <Input className=" bg-orange-200" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <Input className=" bg-orange-200" id="email" type="email" value={email} placeholder="Enter username or email" onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
@@ -33,13 +34,23 @@ export default function Login() {
             id="password"
             type="password"
             value={password}
+            placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <h1 className="text-center ">
+            <Link href='/' className="text-xs text-red-800">Forgot password?</Link>
+        </h1>
         </div>
+        
         <Button type="submit" className="w-full bg-orange-950 text-white hover:text-black hover:bg-orange-700">
           Login
         </Button>
+
+        <h1 className="space-y-2 ml-5 text-sm">
+           Dont have an account? 
+           <Link href='/register' className="text-sm text-red-800">  Create account </Link>
+        </h1>
       </form>
     </div>
   )

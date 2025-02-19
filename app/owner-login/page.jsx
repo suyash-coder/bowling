@@ -31,7 +31,7 @@ export default function Login() {
         <h1 className="text-4xl text-orange-950 font-bold text-center">Owner Login</h1>
         <div className="space-y-2 " >
           <Label htmlFor="email">Email</Label>
-          <Input className=" bg-orange-200" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <Input className=" bg-orange-200" id="email" type="email" value={email} placeholder="Enter username or email" onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
@@ -40,6 +40,7 @@ export default function Login() {
             id="password"
             type="password"
             value={password}
+            placeholder="Enter password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
