@@ -26,7 +26,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[url('/bg.png')] bg-cover">
+    <div className="flex min-h-screen items-center justify-center bg-[url('/bg1.png')] bg-cover">
       <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm p-10 bg-orange-400 flex flex-col rounded-3xl bg-opacity-90">
         <h1 className="text-4xl text-orange-950 font-bold text-center">Owner Login</h1>
         <div className="space-y-2 " >

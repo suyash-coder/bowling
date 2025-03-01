@@ -78,7 +78,7 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <main className="p-8 bg-[url('/bg.png')] bg-cover bg-fixed min-h-screen">
+    <main className="p-8 bg-[url('/bg1.png')] bg-cover bg-fixed min-h-screen">
        <div className="flex  justify-end">
       <h1 className="text-5xl text-orange-400 mr-44 font-bold flex p-5 rounded-3xl bg-orange-950 bg-opacity-75 mb-4">
         Customer Dashboard

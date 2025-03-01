@@ -5,7 +5,7 @@ import ball from "../public/ball.png"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center bg-[url('/bg.png')] bg-cover justify-center p-20">
+    <main className="flex min-h-screen flex-col items-center bg-[url('/bg1.png')] bg-cover justify-center p-20">
       <div className="relative flex flex-col mt-40 items-center justify-center px-96">
       <div className="absolute px-10 pt-10 bg-orange-400 flex flex-col rounded-3xl bg-opacity-90 justify-center items-center ">
      
@@ -15,13 +15,7 @@ export default function Home() {
       <h1 className="text-5xl text-center text-orange-900 font-bold  mb-8 ">BOWLING ALLEY </h1>
 
     </div> 
-    <Image  
-        src={ball}
-        alt="Ball"
-        height={130}
-        width={130}
-        className=" absolute ml-96 mb-80"
-      />
+   
   
       </div>
       <div className="bg-orange-900 p-3 rounded-xl mt-44 gap-10 flex justify-center">

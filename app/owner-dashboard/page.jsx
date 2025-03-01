@@ -41,7 +41,7 @@ export default function OwnerDashboard() {
   }
 
   return (
-    <div className="p-8 bg-[url('/bg.png')] bg-cover bg-fixed">
+    <div className="p-8 bg-[url('/bg1.png')] bg-cover bg-fixed">
       <div className="flex justify-between">
          <h1 className="text-6xl font-extrabold bg-orange-950 bg-opacity-85 text-orange-400 p-6 rounded-3xl  mb-4">Owner Dashboard</h1>
         <Image  
